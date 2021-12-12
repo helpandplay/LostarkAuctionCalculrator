@@ -1,0 +1,57 @@
+﻿<Window x:Class="LostArkAuctionCalculrator.Calculrator"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:LostArkAuctionCalculrator"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+             mc:Ignorable="d" 
+             WindowStyle="None"
+             ResizeMode="NoResize"
+             Height="90"
+             Width="200">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Deactivated">
+            <i:InvokeCommandAction Command="{Binding LostFocusCmd}"/>
+        </i:EventTrigger>
+        <i:EventTrigger EventName="Activated">
+            <i:InvokeCommandAction Command="{Binding GotFocusCmd}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Grid Margin="5,0,5,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+            <RadioButton Content="4" IsChecked="{Binding People4}" Margin="0,0,10,0"/>
+            <RadioButton Content="8" IsChecked="{Binding People8}"/>
+        </StackPanel>
+        <TextBox Text="{Binding Auction}" 
+                 Grid.Row="1" 
+                 FontSize="24" 
+                 VerticalContentAlignment="Center" 
+                 FontWeight="Bold"
+                 BorderThickness="0"
+                 Background="FloralWhite"
+                 >
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="GotFocus">
+                    <ei:CallMethodAction TargetObject="{Binding RelativeSource={RelativeSource Mode=FindAncestor, 
+                                                                                       AncestorType={x:Type Window}}, 
+                                                                Path=DataContext}" 
+                                 MethodName="OnMouseFocus"/>
+                </i:EventTrigger>
+                <i:EventTrigger EventName="TextChanged">
+                    <i:InvokeCommandAction Command="{Binding AuctionTextInputCmd}" 
+                                           CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, 
+                                                                                                     AncestorType={x:Type TextBox}}, 
+                                                                      Path=Text}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </TextBox>
+        <TextBlock Grid.Row="2" Text="{Binding Info}" Margin="0,0,0,5" FontSize="14" FontWeight="Bold" VerticalAlignment="Center"/>
+    </Grid>
+</Window>

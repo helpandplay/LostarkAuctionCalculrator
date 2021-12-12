@@ -1,0 +1,4 @@
+﻿[*.cs]
+
+# IDE0019: 패턴 일치 사용
+csharp_style_pattern_matching_over_as_with_null_check = false
