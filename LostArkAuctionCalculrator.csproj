@@ -172,21 +172,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Image\money.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Image\money.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Image\moneyMono.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Lib\Microsoft.Expression.Interactions.dll" />
     <EmbeddedResource Include="Lib\System.Windows.Interactivity.dll" />
   </ItemGroup>
@@ -204,6 +189,11 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="money.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\money.ico" />
+    <Resource Include="Image\money.png" />
+    <Resource Include="Image\moneyMono.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

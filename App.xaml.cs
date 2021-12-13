@@ -8,15 +8,14 @@ namespace LostArkAuctionCalculrator
   /// </summary>
   public partial class App : Application
   {
-    Mutex mutex;
+
     protected override void OnStartup(StartupEventArgs e)
     {
       base.OnStartup(e);
 
       string mutexName = "program";
-      bool createNew;
 
-      mutex = new Mutex(true, mutexName, out createNew);
+      var mutex = new Mutex(true, mutexName, out bool createNew);
 
       if (!createNew)
       {

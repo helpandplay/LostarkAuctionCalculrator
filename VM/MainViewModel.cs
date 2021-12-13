@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Input;
@@ -17,7 +18,7 @@ namespace LostArkAuctionCalculrator.VM
     private NotifyIcon tray;
     private Window calculrator;
 
-
+    #region Command
     private ICommand _LoadedCmd;
     private ICommand _DeActivatedCmd;
     public ICommand LoadedCmd
@@ -36,8 +37,8 @@ namespace LostArkAuctionCalculrator.VM
         return this._DeActivatedCmd;
       }
     }
-
-
+    #endregion
+    #region CallActionCmd
     public void OnMouseDrag(object sender, MouseButtonEventArgs e)
     {
       if (e.LeftButton != MouseButtonState.Pressed) return;
@@ -55,6 +56,14 @@ namespace LostArkAuctionCalculrator.VM
       this.calculrator = new Calculrator(this.view);
       this.calculrator.Show();
     }
+    public void OnMouseWheel(object sender, MouseWheelEventArgs e)
+    {
+      if (!(Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl))) return;
+      Point point = Mouse.GetPosition(this.view);
+      Trace.WriteLine($"{point.X}, {point.Y}");
+    }
+    #endregion
+    #region Cmd
     private void OnLoaded(object param)
     {
       this.SetInitPosition();
@@ -66,6 +75,8 @@ namespace LostArkAuctionCalculrator.VM
       if (this.view.Topmost) return;
       this.view.Topmost = true;
     }
+    #endregion
+    #region Internal Method
     private void CloseMenu_Click(object sender, EventArgs e)
     {
       var menuItem = sender as MenuItem;
@@ -118,7 +129,7 @@ namespace LostArkAuctionCalculrator.VM
       this.tray.Visible = false;
       this.tray.ContextMenu = null;
     }
-
+    #endregion
     public MainViewModel(MainWindow view) => this.view = view;
   }
 }
